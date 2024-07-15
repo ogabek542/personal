@@ -1,19 +1,24 @@
 import { useSelector } from "react-redux";
 import { selectAllPosts } from "./postsSlice";
+import PostAuthor from "./PostAuthor";
+import "./postslist.css"
 
 const PostsLIst = () => {
   const posts = useSelector(selectAllPosts);
 
   const renderedPosts = posts.map((post) => (
-    <article key={post.id}>
+    <article key={post.id} className="section-style">
       <h3>{post.title}</h3>
       <p>{post.content.substring(0, 100)}</p>
+      <p className="post-credit">
+        <PostAuthor userId={post.userId}/>
+      </p>
     </article>
   ));
 
   return (
 
-    <section>
+    <section >
       <h2>Posts</h2>
       {renderedPosts}
     </section>
