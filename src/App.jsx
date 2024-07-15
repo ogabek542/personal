@@ -1,16 +1,12 @@
 import "./App.css";
-import AddPostForm from "./features/counter/AddPostForm";
-import PostList from "./features/counter/PostList";
+import PostsLIst from "./features/posts/PostsLIst";
 
 function App() {
   return (
     <>
-    <div className="add_post">
-        <AddPostForm />
-    </div>
-      <div className="App">
-        <PostList/>
-      </div>
+  <main className="App">
+    <PostsLIst/>
+  </main>
     </>
   );
 }

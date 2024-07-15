@@ -1,48 +1,55 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
+
+
 import { postAdded } from "./postsSlice";
-import "./addpost.css";
 
 const AddPostForm = () => {
+
+  const dispatch = useDispatch();  
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const dispatch = useDispatch();
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
 
   const onSavePostClicked = () => {
-    if (title && content) {
-      dispatch(
-        postAdded(title,content)
-      );
-      setTitle("");
-      setContent("");
+    if (title && content){
+        dispatch(
+            postAdded({
+                id:nanoid(),
+                title,
+                content
+            })
+        )
+        setTitle("")
+        setContent("")
+
     }
-  };
+  }
 
   return (
-    <section className="main_section">
+    <section>
       <h2>Add a New Post</h2>
-      <form className="form_content">
-        <label htmlFor="postTitle">Post Title</label>
+      <form>
+        <label htmlFor="postTitle">Post Title:</label>
         <input
-          type="text"
-          id="postTitle"
-          name="postTitle"
-          value={title}
-          onChange={onTitleChanged}
+        type="text"
+        id="postTitle"
+        name="postTitle"
+        value={title}
+        onChange={onTitleChanged}
         />
         <label htmlFor="postContent">Content:</label>
         <textarea
-          id="postContent"
-          name="postContent"
-          value={content}
-          onChange={onContentChanged}
+        id="postContent"
+        name="postContent"
+        value={content}
+        onChange={onContentChanged}
         />
         <button type="button" onClick={onSavePostClicked}>
-          Save Post
+            Save Post
         </button>
       </form>
     </section>
